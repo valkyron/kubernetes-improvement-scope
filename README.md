@@ -1,4 +1,4 @@
-# kubernetes-improvement-scope
+![image](https://github.com/valkyron/kubernetes-improvement-scope/assets/45105530/8c014505-a51b-46b8-8df1-cc3153707ee6)# kubernetes-improvement-scope
 Implementing a research paper to improve upon the existing kubernetes use case using an example kubernetes 5-node cluster
 System: Windows
 
@@ -34,4 +34,19 @@ nodes:
 ```
 kind create cluster --config=cluster-config.yaml
 ```
-Setup 
+
+- Install WeaveNet CLI
+```
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+```
+
+Verify weavenet configuration:
+```kubectl get pods -n kube-system```
+
+- Setup 5 microservices with varying resource requirements:<br>
+Create a separate YAML file for each microservice deployment. Each microservice will have different resource requirements specified.
+
+Microservice A (microservice-a.yaml):
+```
+
+```
