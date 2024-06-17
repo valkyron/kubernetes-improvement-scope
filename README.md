@@ -46,7 +46,38 @@ Verify weavenet configuration:
 - Setup 5 microservices with varying resource requirements:<br>
 Create a separate YAML file for each microservice deployment. Each microservice will have different resource requirements specified.
 
-Microservice A (microservice-a.yaml):
+- Make a docker image: ```docker build -t hello-world-node .```
+
+- Deploy microservices:
+```
+kubectl apply -f microservice1-deployment.yaml
+kubectl apply -f microservice1-service.yaml
+# Repeat for other microservices
 ```
 
+- Apply network policy:
+ ```kubectl apply -f network-policy.yaml```
+
+### Utilites
+
+- Verifying clusters and nodes:
+
+1. ```kind get clusters```
+2. ```kubectl get nodes```
+3. Check Weavernet pods status: ```kubectl get pods -n kube-system -l name=weave-net```
+
+- How to stop all services
+
+- ```
+  kubectl delete deployment microservice1 microservice2 microservice3 microservice4 microservice5
+kubectl delete service microservice1-service microservice2-service microservice3-service microservice4-service microservice5-service
+
+kind delete cluster --name kind
+  ```
+
+- Verify cleanup
+```
+kubectl get all
+docker ps
+kind get clusters
 ```
