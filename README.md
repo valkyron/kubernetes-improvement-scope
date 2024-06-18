@@ -1,4 +1,6 @@
-![image](https://github.com/valkyron/kubernetes-improvement-scope/assets/45105530/8c014505-a51b-46b8-8df1-cc3153707ee6)# kubernetes-improvement-scope
+![image](https://github.com/valkyron/kubernetes-improvement-scope/assets/45105530/8c014505-a51b-46b8-8df1-cc3153707ee6)
+# kubernetes-improvement-scope
+
 Implementing a research paper to improve upon the existing kubernetes use case using an example kubernetes 5-node cluster
 System: Windows
 
