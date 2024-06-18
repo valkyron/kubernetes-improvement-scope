@@ -66,6 +66,16 @@ kubectl apply -f microservice1-service.yaml
 - Check if the network policy is applied: ```kubectl get networkpolicy``` 
 - Describe the NetworkPolicy to verify its details: ```kubectl describe networkpolicy allow-specific```
 
+### Analyzing
+
+- Print kube scheduler logs:
+```
+kubectl logs -n kube-system kube-scheduler-kind-control-plane
+```
+
+- Print events related to pods in the 'kube-system' namespace
+```kubectl get events --namespace kube-system --field-selector involvedObject.kind=Pod```
+
 ### Utilites
 
 - Verifying clusters and nodes:
