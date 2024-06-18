@@ -1,4 +1,3 @@
-![image](https://github.com/valkyron/kubernetes-improvement-scope/assets/45105530/8c014505-a51b-46b8-8df1-cc3153707ee6)
 # kubernetes-improvement-scope
 
 Implementing a research paper to improve upon the existing kubernetes use case using an example kubernetes 5-node cluster
@@ -48,7 +47,7 @@ Verify weavenet configuration:
 - Setup 5 microservices with varying resource requirements:<br>
 Create a separate YAML file for each microservice deployment. Each microservice will have different resource requirements specified.
 
-- Make a docker image: ```docker build -t hello-world-node .```
+- Make a docker image: ```docker build -t hello-world-node:latest .```
 
 - Deploy microservices:
 ```
@@ -57,8 +56,15 @@ kubectl apply -f microservice1-service.yaml
 # Repeat for other microservices
 ```
 
+- Check if the microservices are working: ```kubectl get pods -o wide```
+
+![image](https://github.com/valkyron/kubernetes-improvement-scope/assets/45105530/6a7ff172-33ff-41ba-9e77-fcd3e843d372)
+
 - Apply network policy:
  ```kubectl apply -f network-policy.yaml```
+
+- Check if the network policy is applied: ```kubectl get networkpolicy``` 
+- Describe the NetworkPolicy to verify its details: ```kubectl describe networkpolicy allow-specific```
 
 ### Utilites
 
@@ -67,6 +73,16 @@ kubectl apply -f microservice1-service.yaml
 1. ```kind get clusters```
 2. ```kubectl get nodes```
 3. Check Weavernet pods status: ```kubectl get pods -n kube-system -l name=weave-net```
+4. Check all pods are running: ```kubectl get pods -o wide```
+5. Check images on each node:
+```
+docker exec -it kind-control-plane crictl images | grep hello-world-node
+docker exec -it kind-worker crictl images | grep hello-world-node
+docker exec -it kind-worker2 crictl images | grep hello-world-node
+docker exec -it kind-worker3 crictl images | grep hello-world-node
+docker exec -it kind-worker4 crictl images | grep hello-world-node
+docker exec -it kind-worker5 crictl images | grep hello-world-node
+```
 
 - How to stop all services
 
