@@ -76,6 +76,31 @@ kubectl logs -n kube-system kube-scheduler-kind-control-plane
 - Print events related to pods in the 'kube-system' namespace
 ```kubectl get events --namespace kube-system --field-selector involvedObject.kind=Pod```
 
+## Improvements
+
+1. Pod priority is not considered and a randomly selected pod is scheduled on the node with the highest node score, and hence the global optimal solution cannot be made <br>
+**Solution:** Queue Sort Plugin
+
+2. The containers can be be distributed across different nodes - this can be done using **Node Affinity**
+```
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                  - <node-name>  # Replace with your node name
+```
+
+and apply on that microservice: ```kubectl apply -f microservice-1.yaml``` <br>
+**Solution:** Split and Distribute Extender Plugin
+
+3. Only CPU and RAM usage rates are considered in the service scheduling while latency or bandwidth usage rates are not considered at all. <br>
+**Solution:** Topology Aware Scoring Extender Plugin
+
 ### Utilites
 
 - Verifying clusters and nodes:
